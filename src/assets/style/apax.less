@@ -1,0 +1,50 @@
+@import 'common.less';
+
+
+.info-view {
+    padding-top: 20vh;
+    padding-bottom: 10vh;
+
+    .row {
+        margin-top: 5em;
+    }
+
+    .info{
+        text-align: center;
+        line-height: 2em;
+    }
+
+    h2 {
+        font-size: 4em;
+        font-weight: normal;
+    }
+
+    h3 {
+        font-size: 2em;
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.5em;
+        font-weight: normal;
+        margin:0;
+    }
+}
+
+
+&.fade-enter-active, &.fade-leave-active {
+    transition: all 0.5s ease;
+}
+&.fade-enter, &.fade-leave-active {
+    opacity: 0;
+}
+
+.page-edges .top {
+    top: 0;
+    background: linear-gradient(180deg,#161517,rgba(0,0,0,0));
+}
+
+.page-edges .bottom {
+    bottom: 0;
+    background: linear-gradient(0deg,#161517,rgba(0,0,0,0));
+}
