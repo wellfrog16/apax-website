@@ -1,5 +1,5 @@
 <template>
-    <div class="info-view clearfix">
+    <div class="info-view about-view clearfix">
         <div class="info col-xs-offset-2 col-xs-8">
             <h2>ABOUT US</h2>
             <br>
@@ -70,8 +70,14 @@
 <script>
 export default {
     name : 'about-view',
-    created(){
-        console.log(1);
+    mounted(){
+        setTimeout(()=> this.$('.about-view').fadeIn(), 500)
     }
 }
 </script>
+
+<style lang="less">
+.about-view {
+    display: none;
+}
+</style>

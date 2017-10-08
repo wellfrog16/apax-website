@@ -1,5 +1,5 @@
 <template>
-    <div class="info-view">
+    <div class="info-view career-view">
         <div class="info col-xs-offset-2 col-xs-8">
 
             <h2>CAREER</h2>  
@@ -20,8 +20,14 @@
 <script>
 export default {
     name : 'career-view',
-    created(){
-        console.log(1);
+    mounted(){
+        setTimeout(()=> this.$('.career-view').fadeIn(), 500)
     }
 }
 </script>
+
+<style lang="less">
+.career-view {
+    display: none;
+}
+</style>

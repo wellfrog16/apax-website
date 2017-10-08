@@ -2,8 +2,8 @@
 
 
 .info-view {
-    padding-top: 20vh;
-    padding-bottom: 10vh;
+    padding-top: 25vh;
+    padding-bottom: 15vh;
 
     .row {
         margin-top: 5em;
@@ -15,8 +15,9 @@
     }
 
     h2 {
-        font-size: 4em;
+        font-size: 2.5em;
         font-weight: normal;
+        line-height: 1.5em;
     }
 
     h3 {
@@ -31,9 +32,21 @@
     }
 }
 
+a {
+    color: @main-color;
+    transition: color 0.3s ease-in-out; 
+
+    &:hover {
+        color: @over-color;
+        transition: color 0.3s ease-in-out; 
+    }
+}
+
+
 
 &.fade-enter-active, &.fade-leave-active {
-    transition: all 0.5s ease;
+    transition: all 10.5s ease;
+    opacity: 1;
 }
 &.fade-enter, &.fade-leave-active {
     opacity: 0;
@@ -47,4 +60,14 @@
 .page-edges .bottom {
     bottom: 0;
     background: linear-gradient(0deg,#161517,rgba(0,0,0,0));
+}
+
+.clearfix {
+    zoom:1;
+
+    &:after {
+        content:'';
+        clear:both;
+        display:block;
+    }
 }

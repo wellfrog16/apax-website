@@ -1,5 +1,5 @@
 <template>
-    <div class="info-view">
+    <div class="info-view partners-view clearfix">
         <div class="info col-xs-offset-2 col-xs-8">
 
             <h2>PARTNERS</h2>
@@ -17,8 +17,14 @@
 <script>
 export default {
     name : 'partners-view',
-    created(){
-        console.log(1);
+    mounted(){
+        setTimeout(()=> this.$('.partners-view').fadeIn(), 500)
     }
 }
 </script>
+
+<style lang="less">
+.partners-view {
+    display: none;
+}
+</style>

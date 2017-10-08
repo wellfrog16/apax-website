@@ -1,17 +1,9 @@
 <template>
-    <div class="info-view">
-        <div class="info col-xs-offset-2 col-xs-8">
-
-            <h2>Events</h2>
-
-        </div>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
 export default {
     name : 'events-view',
-    created(){
-    }
 }
 </script>

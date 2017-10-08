@@ -13,10 +13,16 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'nav-view',
-    created(){
-        console.log(0);
+    mounted(){
+        setTimeout(()=> this.$('.nav-view a').fadeIn(), 500);
+
+        this.$('a').on('click', function(){
+            Bus.$emit('change');
+        })
     }
 }
 </script>
@@ -36,6 +42,7 @@ export default {
     }
 
     a {
+        display: none;
         margin: 0 20px;
         color: @main-color;
 
@@ -47,6 +54,8 @@ export default {
 
 @media screen and (max-width: @max-width) {
 .nav-view {
+    display: none;
+
     a {
         display: block;
         line-height: 50px;

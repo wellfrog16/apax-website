@@ -2,7 +2,8 @@
     <div class="main-nav">
         <div class="nav1"></div>
         <div class="nav2"></div>
-        <div class="nav-toggle" @click="goNav"></div>
+        <div class="nav-toggle" @click="goNav" v-show="toggle"></div>
+        <div class="nav-close" @click="goBack" v-show="close"></div>
         <div class="nav"></div>
         <div class="language"><span>中文</span><span>EN</span></div>
     </div>
@@ -10,11 +11,32 @@
 
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'main-nav',
+    data (){
+        return {
+            toggle : true,
+            close : false
+        }
+    },
+    mounted(){
+        Bus.$on('change',()=> {
+            this.toggle = true;
+            this.close = false;
+        });
+    },
     methods : {
         goNav (){
-            this.$router.push('nav');
+            this.$router.push('/nav');
+            this.toggle = !this.toggle;
+            this.close = !this.close;
+        },
+        goBack (){
+            this.$router.go(-1);
+            this.toggle = !this.toggle;
+            this.close = !this.close;
         }
     }
 }
@@ -71,6 +93,20 @@ export default {
 
         &:hover {
             background-position-x: -20px;
+        }
+    }
+
+    .nav-close {
+        width: 14px;
+        height: 15px;
+        background-image: url('../assets/img/icon/nav-close.png');
+        position: fixed;
+        top: @padding-height;
+        right: @padding-width;
+        cursor: pointer;
+
+        &:hover {
+            background-position-x: -14px;
         }
     }
 
