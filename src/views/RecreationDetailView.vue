@@ -22,6 +22,9 @@ from the daily life, along with the trends, justified The brand's features of al
             <div class="back col-xs-1">
                 <a href="#" @click="goback">BACK</a>
             </div>
+            <div class="share col-xs-offset-1 col-xs-8">
+                <Share></Share>
+            </div>
         </div>
     </div>
 </template>
@@ -29,11 +32,12 @@ from the daily life, along with the trends, justified The brand's features of al
 <script>
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus';
+import Bus from '../assets/lib/helper/bus'
+import Share from '../components/Share.vue'
 
 export default {
     name : 'recreation-detail-view',
-    components : { OurworkSubNav, Arrow },
+    components : { OurworkSubNav, Arrow, Share },
     data (){
         return {
             link : 'recreation'
@@ -67,6 +71,10 @@ export default {
     .title {
         text-align: center;
         padding: 0 5em;
+
+        p {
+            line-height: 2em;
+        }
     }
 
     .date {

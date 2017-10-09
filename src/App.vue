@@ -37,6 +37,8 @@ export default {
             video : true
         }
     },
+    created(){
+    },
     mounted(){
         Bus.$on('canvas-open',()=> {
             this.canvas = true;

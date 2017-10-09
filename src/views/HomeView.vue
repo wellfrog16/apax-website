@@ -29,6 +29,7 @@ export default {
 
 .home-view {
     display: none;
+    padding-top: 40vh;
 }
 
 </style>
