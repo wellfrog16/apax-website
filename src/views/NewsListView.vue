@@ -3,7 +3,7 @@
         
         <div class="list col-xs-offset-1 col-xs-10">
             <div class="item col-sm-6 col-xs-12" v-for="item in items" :key="item.id" @click="goDetail(item.id)">
-                <img alt="" :src="item.thumbnailUrl">
+                <img alt="" :src="item.conver">
                 <div class="hover">
                     <div class="mask">
                         <h2>{{ item.title }}</h2>
@@ -19,6 +19,7 @@
 <script>
 
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'news-list-view',
@@ -29,13 +30,23 @@ export default {
         }
     },
     created() {
-        this.$axios.get('http://jsonplaceholder.typicode.com/photos?albumId=1').then((response) => {
-            this.items = response.data;
-            this.items.splice(11, this.items.length);
-            this.replaceImgSrc();
+        // this.$axios.get('http://jsonplaceholder.typicode.com/photos?albumId=1').then((response) => {
+        //     this.items = response.data;
+        //     this.items.splice(11, this.items.length);
+        //     this.replaceImgSrc();
+        // }, (error) => {
+        //     console.log(error)
+        // });
+        this.items = [];
+        this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=4&category=ourwork&orderBy=id:desc').then((response) => {
+            
+            this.items = response.data.result.content;
         }, (error) => {
             console.log(error)
         });
+    },
+    mounted(){
+        Bus.$emit('canvas-open');
     },
     updated(){
             let sr = this.$sr({ reset: true, delay: 300 });

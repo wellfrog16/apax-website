@@ -12,10 +12,14 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'recreation-info-view',
     mounted(){
         setTimeout(()=> this.$('.recreation-info-view').fadeIn(), 500);
+
+        Bus.$emit('canvas-close');
     }
 }
 </script>

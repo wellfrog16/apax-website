@@ -18,10 +18,14 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'career-view',
     mounted(){
-        setTimeout(()=> this.$('.career-view').fadeIn(), 500)
+        setTimeout(()=> this.$('.career-view').fadeIn(), 500);
+
+        Bus.$emit('canvas-close');
     }
 }
 </script>

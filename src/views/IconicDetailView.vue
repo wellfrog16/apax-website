@@ -88,6 +88,7 @@ import OurworkSubNav from '../components/OurworkSubNav.vue'
 import AContent from '../components/AContent.vue'
 import Share from '../components/Share.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'iconic-detail-view',
@@ -113,8 +114,9 @@ export default {
         });
     },
     mounted(){
-            let sr = this.$sr({ reset: true, delay: 0 });
-            sr.reveal('.content div', { duration: 1000 });
+        Bus.$emit('canvas-open');
+        let sr = this.$sr({ reset: true, delay: 0 });
+        sr.reveal('.content div', { duration: 1000 });
     },
     methods : {
         goback(){

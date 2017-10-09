@@ -29,6 +29,7 @@ from the daily life, along with the trends, justified The brand's features of al
 <script>
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'recreation-detail-view',
@@ -37,6 +38,9 @@ export default {
         return {
             link : 'recreation'
         }
+    },
+    mounted(){
+        Bus.$emit('canvas-open');
     },
     methods : {
         goback(){

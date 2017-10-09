@@ -25,6 +25,7 @@
 
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'events-list-view',
@@ -60,6 +61,9 @@ export default {
         //     dataType: 'jsonp'
         // });
         console.log(121);
+    },
+    mounted(){
+        Bus.$emit('canvas-open');
     },
     updated(){
         // this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=4&category=ourwork&orderBy=id:desc').then((response) => {

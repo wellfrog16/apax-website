@@ -20,6 +20,8 @@ export default {
     mounted(){
         setTimeout(()=> this.$('.nav-view a').fadeIn(), 500);
 
+        Bus.$emit('canvas-close');
+
         this.$('a').on('click', function(){
             Bus.$emit('change');
         })

@@ -12,23 +12,46 @@
             </transition> -->
         </div>        
         <div class="footer clearfix">沪公网安备31010602001763号</div>
-        <div class="bg" id="a">
+        <div class="bg" id="a" v-show="canvas">
             <div id="b">
             <canvas id="c"></canvas>
             </div>
+        </div>
+        <div class="video" v-show="video">
+            <video src="../static/bg.mp4" autoplay="true" loop="true"></video>
         </div>
     </div>
 </template>
 
 <script>
 import MainNav from './components/MainNav'
+import Bus from './assets/lib/helper/bus';
 import './assets/lib/bootstrap/less-3.3.7/bootstrap.less'
 
 export default {
     name: 'app',
     components : { MainNav },
+    data(){
+        return {
+            canvas : false,
+            video : true
+        }
+    },
     mounted(){
-        this.canvas3();
+        Bus.$on('canvas-open',()=> {
+            this.canvas = true;
+            this.video = false;
+            this.canvas3();
+        });
+
+        Bus.$on('canvas-close',()=> {
+            this.canvas = false;
+            this.video = true;
+        });
+
+        if (this.canvas) {
+            this.canvas3();
+        }
     },
     methods : {
         canvas1() {
@@ -493,6 +516,25 @@ html, body {
     //background-color: #000;
 
     canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+
+
+    video {
         position: absolute;
         top: 0;
         left: 0;

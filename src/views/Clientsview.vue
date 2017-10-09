@@ -42,10 +42,13 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'clients-view',
     mounted(){
-        setTimeout(()=> this.$('.clients-list-view').fadeIn(), 500)
+        setTimeout(()=> this.$('.clients-list-view').fadeIn(), 500);
+        Bus.$emit('canvas-close');
     }
 }
 </script>

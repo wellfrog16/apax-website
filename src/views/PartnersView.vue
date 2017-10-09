@@ -15,10 +15,13 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'partners-view',
     mounted(){
-        setTimeout(()=> this.$('.partners-view').fadeIn(), 500)
+        setTimeout(()=> this.$('.partners-view').fadeIn(), 500);
+        Bus.$emit('canvas-close');
     }
 }
 </script>

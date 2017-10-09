@@ -39,6 +39,7 @@ The show was capped off with giant double-F logos projected onto neighboring mou
 <script>
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'iconic-list-view',
@@ -61,6 +62,9 @@ export default {
     updated(){
             let sr = this.$sr({ reset: true, delay: 300 });
             sr.reveal('.item', { duration: 1000 });
+    },
+    mounted(){
+        Bus.$emit('canvas-open');
     },
     methods: {
         replaceImgSrc(){

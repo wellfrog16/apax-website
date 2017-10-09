@@ -10,11 +10,17 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'home-view',
+    created(){
+        Bus.$emit('canvas-close');
+    },
     mounted(){
+        Bus.$emit('canvas-close');
         setTimeout(()=> this.$('.home-view').fadeIn(), 500)
-        setTimeout(()=> this.$('.home-view').fadeOut(() => this.$router.push('/ourwork')), 3000)
+        setTimeout(()=> this.$('.home-view').fadeOut(() => this.$router.push('/ourwork')), 3000);
     }
 }
 </script>

@@ -12,10 +12,14 @@
 </template>
 
 <script>
+import Bus from '../assets/lib/helper/bus';
+
 export default {
     name : 'live-info-view',
     mounted(){
         setTimeout(()=> this.$('.live-info-view').fadeIn(), 500);
+
+        Bus.$emit('canvas-close');
     }
 }
 </script>

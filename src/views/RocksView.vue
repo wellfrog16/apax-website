@@ -171,6 +171,7 @@
 <script>
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'rocks-view',
@@ -195,8 +196,11 @@ export default {
         // });
     },
     mounted(){
-            let sr = this.$sr({ reset: true, delay: 0 });
-            sr.reveal('.content div', { duration: 1000 });
+        console.log(2)
+        Bus.$emit('canvas-open');
+        
+        let sr = this.$sr({ reset: true, delay: 0 });
+        sr.reveal('.content div', { duration: 1000 });
     },
     methods : {
         goback(){

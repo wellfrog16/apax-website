@@ -25,6 +25,7 @@
 
 import OurworkSubNav from '../components/OurworkSubNav.vue'
 import Arrow from '../components/Arrow.vue'
+import Bus from '../assets/lib/helper/bus'
 
 export default {
     name : 'sifs-list-view',
@@ -50,6 +51,9 @@ export default {
         }, (error) => {
             console.log(error)
         });
+    },
+    mounted(){
+        Bus.$emit('canvas-open');
     },
     updated(){
             let sr = this.$sr({ reset: true, delay: 300 });

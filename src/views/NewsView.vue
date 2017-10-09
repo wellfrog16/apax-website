@@ -3,7 +3,8 @@
 </template>
 
 <script>
+
 export default {
-    name : 'news-view',
+    name : 'news-view'
 }
 </script>
