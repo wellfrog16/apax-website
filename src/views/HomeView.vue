@@ -26,10 +26,17 @@ export default {
 </script>
 
 <style lang="less">
+@import '../assets/style/common.less';
 
 .home-view {
     display: none;
+    
+}
+
+@media screen and (min-width: @max-width) {
+.home-view {
     padding-top: 40vh;
+}    
 }
 
 </style>

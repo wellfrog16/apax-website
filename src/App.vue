@@ -27,6 +27,7 @@
 import MainNav from './components/MainNav'
 import Bus from './assets/lib/helper/bus';
 import './assets/lib/bootstrap/less-3.3.7/bootstrap.less'
+import './assets/lib/jquery/jquery.browser'
 
 export default {
     name: 'app',
@@ -38,12 +39,26 @@ export default {
         }
     },
     created(){
+        $(window).on('resize', () => {
+            let w = $(window).width();
+            let h = $(window).height();
+
+            if ( w/h > 16/9) {
+                $('.video video').removeClass('state1 state2').addClass('state1')
+            }
+            else {
+                $('.video video').removeClass('state1 state2').addClass('state2')
+            }
+        })
     },
     mounted(){
         Bus.$on('canvas-open',()=> {
             this.canvas = true;
             this.video = false;
-            this.canvas3();
+
+            if(!$.browser.mobile) {
+                this.canvas3();
+            }
         });
 
         Bus.$on('canvas-close',()=> {
@@ -51,8 +66,12 @@ export default {
             this.video = true;
         });
 
-        if (this.canvas) {
+        if (this.canvas && !$.browser.mobile) {
             this.canvas3();
+        }
+
+        if($.browser.mobile) {
+            $('.video video, .bg b').remove();
         }
     },
     methods : {
@@ -515,7 +534,7 @@ html, body {
     z-index: -1;
     width: 100%;
     height: 100%;
-    //background-color: #000;
+    background-color: #000;
 
     canvas {
         position: absolute;
@@ -538,9 +557,18 @@ html, body {
 
     video {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .state1 {
         width: 100%;
+        height: auto;
+    }
+
+    .state2 {
+        width: auto;
         height: 100%;
     }
 }

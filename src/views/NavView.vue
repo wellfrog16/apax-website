@@ -18,7 +18,7 @@ import Bus from '../assets/lib/helper/bus';
 export default {
     name : 'nav-view',
     mounted(){
-        setTimeout(()=> this.$('.nav-view a').fadeIn(), 500);
+        setTimeout(()=> $('.nav-view a').fadeIn(), 500);
 
         Bus.$emit('canvas-close');
 
@@ -56,7 +56,7 @@ export default {
 
 @media screen and (max-width: @max-width) {
 .nav-view {
-    display: none;
+    //display: none;
 
     a {
         display: block;

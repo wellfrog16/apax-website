@@ -1,5 +1,5 @@
 <template>
-    <div class="info-view career-view">
+    <div class="info-view career-view clearfix">
         <div class="info col-xs-offset-2 col-xs-8">
 
             <h2>CAREER</h2>  

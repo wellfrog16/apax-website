@@ -11,7 +11,7 @@
                 <img alt="" :src="item.conver">
                 <div class="hover">
                     <div class="mask">
-                        <h2>{{ item.title }}</h2>
+                        <h2>{{ item.enTitle }}</h2>
                         <router-link :to="{ name: 'events-detail', params: { id: item.id }}"><img src="../assets/img/main/more.png" alt=""></router-link>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ export default {
         //     console.log(error)
         // });
         this.items = [];
-        this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=4&category=ourwork&orderBy=id:desc').then((response) => {
+        this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=100&category=ourwork&orderBy=id:desc').then((response) => {
             
             this.items = response.data.result.content;
         }, (error) => {

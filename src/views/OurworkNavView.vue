@@ -16,7 +16,7 @@ export default {
     mounted(){
         setTimeout(()=> this.$('.ourwork-nav-view a').fadeIn(), 500);
 
-        Bus.$emit('canvas-close');
+        //Bus.$emit('canvas-close');
     }
 }
 </script>
