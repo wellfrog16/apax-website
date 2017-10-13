@@ -68,14 +68,16 @@
 </template>
 
 <script>
-import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'about-view',
+    created(){
+        this.$bus.$emit('canvas-close');
+    },
     mounted(){
         setTimeout(()=> this.$('.about-view').fadeIn(), 500);
 
-        Bus.$emit('canvas-close');
+        
     }
 }
 </script>

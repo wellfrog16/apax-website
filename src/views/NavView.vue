@@ -13,18 +13,15 @@
 </template>
 
 <script>
-import Bus from '../assets/lib/helper/bus';
-
 export default {
     name : 'nav-view',
+    created(){
+        this.$bus.$emit('canvas-close');
+    },
     mounted(){
         setTimeout(()=> $('.nav-view a').fadeIn(), 500);
 
-        Bus.$emit('canvas-close');
-
-        this.$('a').on('click', function(){
-            Bus.$emit('change');
-        })
+        $('.nav-view a').on('click', () => this.$bus.$emit('change'))
     }
 }
 </script>

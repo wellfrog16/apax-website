@@ -11,8 +11,6 @@
 
 
 <script>
-import Bus from '../assets/lib/helper/bus';
-
 export default {
     name : 'main-nav',
     data (){
@@ -22,7 +20,7 @@ export default {
         }
     },
     mounted(){
-        Bus.$on('change',()=> {
+        this.$bus.$on('change',()=> {
             this.toggle = true;
             this.close = false;
         });

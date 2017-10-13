@@ -5,14 +5,13 @@
         </div>
 
         <Arrow></Arrow>
-        
         <div class="list col-xs-offset-1 col-xs-10">
             <div class="item col-sm-6 col-xs-12" v-for="item in items" :key="item.id" @click="goDetail(item.id)">
-                <img alt="" :src="item.conver">
+                <img alt="" :src="config.host + item.conver">
                 <div class="hover">
                     <div class="mask">
                         <h2>{{ item.enTitle }}</h2>
-                        <router-link :to="{ name: 'events-detail', params: { id: item.id }}"><img src="../assets/img/main/more.png" alt=""></router-link>
+                        <!-- <router-link :to="{ name: 'events-detail', params: { id: item.id }}"><img src="../assets/img/main/more.png" alt=""></router-link> -->
                     </div>
                 </div>
             </div>
@@ -22,10 +21,10 @@
 </template>
 
 <script>
+import config from '@js-app/config';
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import Arrow from '@/components/Arrow.vue';
 
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus';
 
 export default {
     name : 'events-list-view',
@@ -33,47 +32,23 @@ export default {
     data(){
         return {
             link : 'events',
+            config,
             items : []
         }
     },
     created() {
-        // this.$axios.get('http://jsonplaceholder.typicode.com/photos?albumId=1').then((response) => {
-        //     this.items = response.data;
-        //     this.items.splice(11, this.items.length);
-        //     this.replaceImgSrc();
-        // }, (error) => {
-        //     console.log(error)
-        // });
+        this.$bus.$emit('canvas-open');
+
         this.items = [];
         this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=100&category=ourwork&orderBy=id:desc').then((response) => {
-            
             this.items = response.data.result.content;
         }, (error) => {
             console.log(error)
         });
 
-        // this.$.ajax({
-        //     url: 'http://www.tron-m.com/apax/news/list.do?page=1&rows=10&category=ourwork&orderBy=id:desc',
-        //     type: 'get',
-        //     success: function(response){
-        //         console.log(response);
-        //     },
-        //     dataType: 'jsonp'
-        // });
-        console.log(121);
-    },
-    mounted(){
-        Bus.$emit('canvas-open');
     },
     updated(){
-        // this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=4&category=ourwork&orderBy=id:desc').then((response) => {
-            
-        //     this.items = response.data.result.content;
-        // }, (error) => {
-        //     console.log(error)
-        // });
-
-        let sr = this.$sr({ reset: true, delay: 300 });
+        let sr = this.$sr({ reset: true, delay: 0 });
         sr.reveal('.item', { duration: 1000 });
     },
     methods: {

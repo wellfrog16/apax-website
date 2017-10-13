@@ -18,16 +18,25 @@
             </div>
         </div>
         <div class="video" v-show="video">
-            <video src="../static/bg.mp4" autoplay="true" loop="true"></video>
+            <video :src="videoSrc" x-webkit-airplay="true"
+               webkit-playsinline="true"
+               playsinline="true"
+               autoplay="autoplay"
+               x5-video-player-type="h5"
+               x5-video-player-fullscreen="true"
+               preload="auto" loop="true"></video>
+
         </div>
     </div>
 </template>
 
 <script>
-import MainNav from './components/MainNav'
-import Bus from './assets/lib/helper/bus';
-import './assets/lib/bootstrap/less-3.3.7/bootstrap.less'
-import './assets/lib/jquery/jquery.browser'
+import MainNav from '@/components/MainNav'
+import Bus from '@js-lib/helper/bus';
+import '@js-lib/bootstrap/less-3.3.7/bootstrap.less'
+import '@js-lib/jquery/jquery.browser'
+import videoSrc from '../static/bg.mp4'
+import videoMobileSrc from '../static/bg-mobile.mp4'
 
 export default {
     name: 'app',
@@ -35,23 +44,15 @@ export default {
     data(){
         return {
             canvas : false,
-            video : true
+            video : true,
+            loading : true,
+            videoSrc
         }
     },
     created(){
-        $(window).on('resize', () => {
-            let w = $(window).width();
-            let h = $(window).height();
 
-            if ( w/h > 16/9) {
-                $('.video video').removeClass('state1 state2').addClass('state1')
-            }
-            else {
-                $('.video video').removeClass('state1 state2').addClass('state2')
-            }
-        })
-    },
-    mounted(){
+        //console.log(preloadjs);
+
         Bus.$on('canvas-open',()=> {
             this.canvas = true;
             this.video = false;
@@ -66,13 +67,45 @@ export default {
             this.video = true;
         });
 
+        //console.log(createjs);
+
+        $(window).on('resize', () => {
+            let w = $(window).width();
+            let h = $(window).height();
+
+            if ( w/h > 16/9) {
+                $('.video video').removeClass('state1 state2').addClass('state1')
+            }
+            else {
+                $('.video video').removeClass('state1 state2').addClass('state2')
+            }
+        })
+    },
+    mounted(){
+
+
+        $('#app').on('touchstart', function(){
+            $('.video>video')[0].play();
+        })
+
         if (this.canvas && !$.browser.mobile) {
             this.canvas3();
         }
 
         if($.browser.mobile) {
+            $('.bg b').remove();
+            $('.video video').addClass('state-mobile');
+
+            this.videoSrc = videoMobileSrc;
+        }
+        else {
+            this.loading = false;
+        }
+
+        if($.browser.android) {
             $('.video video, .bg b').remove();
         }
+
     },
     methods : {
         canvas1() {
@@ -523,6 +556,8 @@ html, body {
 .footer {
     text-align: center;
     margin-top: -54px;
+    font-size: 0.5em;
+    color: #444;
     //margin-top: -30px;
     //display: none;
 }
@@ -562,6 +597,14 @@ html, body {
         transform: translate(-50%,-50%);
     }
 
+    .state-mobile {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: initial;
+    }
+
     .state1 {
         width: 100%;
         height: auto;
@@ -570,6 +613,48 @@ html, body {
     .state2 {
         width: auto;
         height: 100%;
+    }
+}
+
+
+// ------------------------------------loading-----------------------------------------
+.loading {
+    width: 100vw;
+    height: 100vh;
+
+    position:absolute;
+    text-align:center;
+    color:#fff;
+    top:0;
+    left:0;
+    //line-height:90vh;
+    z-index:99;
+    background-color:#000;
+
+    .arrow {
+        margin-top: 40vh;
+    }
+
+    .progress {
+        border-radius: 1.5px;
+        width: 30vw;
+        max-width: 500px;
+        min-width: 280px;
+        //width: 500px;
+        height: 2px;
+        background-color: #fff;
+        margin: 20px auto;
+        line-height: 0;
+        font-size: 0;
+        box-shadow: 0px 0px 25px #fff;
+
+        div {
+            background-color: @over-color;
+            height: 2px;
+            border-radius: 1.5px;
+            margin: 0 auto;
+            width: 0;
+        }
     }
 }
 

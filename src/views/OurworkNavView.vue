@@ -9,14 +9,13 @@
 </template>
 
 <script>
-import Bus from '../assets/lib/helper/bus';
-
 export default {
     name : 'ourwork-nav-view',
+    created(){
+        this.$bus.$emit('canvas-close');
+    },
     mounted(){
         setTimeout(()=> this.$('.ourwork-nav-view a').fadeIn(), 500);
-
-        //Bus.$emit('canvas-close');
     }
 }
 </script>

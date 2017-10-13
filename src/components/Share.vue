@@ -1,8 +1,11 @@
 <template>
-    <div class="share">
+    <div class="share hidden-xs">
         <a @click="shareFB"><img src="../assets/img/icon/facebook.png" alt=""></a>
         <a @click="shareWB"><img src="../assets/img/icon/weibo.png" alt=""></a>
-        <a @click="shareWX"><img src="../assets/img/icon/weixin.png" alt=""></a>
+        <a @click="shareWX" class="weixin">
+            <img src="../assets/img/icon/weixin.png" alt="">
+            <div><img :src="qr"></div>
+        </a>
     </div>
 </template>
 
@@ -10,20 +13,24 @@
 <script>
 export default {
     name : 'share',
+    data(){
+        return {
+            qr:''
+        }
+    },
     methods : {
         shareWX(){
-            this.$.ajax({
-                url: 'http://www.tron-m.com/tron-api/qr/jsonp.do?text=http://www.baidu.com&jsonpcallback=success',
-                dataType: 'jsonp',
-                jsonpCallback:'successCallback',  
-                success: function(data){
-                    //console.log(JSON.stringify(data));
-                    console.log(data);
-                },
-                error: function(){
-                    console.log('失败');
-                }
-            })
+            if (this.qr === '') {
+                this.$axios.get('http://www.tron-m.com/api/qr/json.do?text=' + encodeURIComponent(location.href)).then((response) => {
+                    this.qr = 'data:img/png;base64,' + response.data.msg;
+                    $('.weixin div').toggle();
+                }, (error) => {
+                    console.log(error)
+                });
+            }
+            else {
+                $('.weixin div').toggle();
+            }
         },
 
         shareWB(){
@@ -45,6 +52,22 @@ export default {
     a {
         margin: 0 5px;
         cursor: pointer;
+        position: relative;
+
+        div {
+            position: absolute;
+            top:-220px;
+            left:-100px;
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            display: none;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }
 </style>

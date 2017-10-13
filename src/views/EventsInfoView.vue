@@ -3,7 +3,7 @@
         <div class="info events col-xs-offset-2 col-xs-8">
             <img src="../assets/img/main/events-title.png" alt="">
             <h3>EXPERIENTIAL MARKETING</h3>
-            <p>APAX EVENTS provides immersed “Experiential Marketing” service integrating all aspects in communication and resources. <p>
+            <p>APAX EVENTS provides immersed “Experiential Marketing” service integrating all aspects in communication and resources. </p>
             <p>Our offices in Asia and business network covers throughout the world. </p>
             <p>We develop and deliver a wide range of services covering fashion and premium events, art exhibitions, retail design, as well as <br> official fashion organization management such as Shanghai Fashion Week and Shanghai International Fashion Showcase. </p>
 
@@ -14,14 +14,13 @@
 </template>
 
 <script>
-import Bus from '../assets/lib/helper/bus';
-
 export default {
     name : 'events-info-view',
+    created(){
+        this.$bus.$emit('canvas-close');
+    },
     mounted(){
         setTimeout(()=> this.$('.events-info-view').fadeIn(), 500);
-
-        Bus.$emit('canvas-close');
     }
 }
 </script>

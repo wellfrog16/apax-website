@@ -24,6 +24,11 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      '@img' : resolve('src/assets/img'),
+      '@js-app' : resolve('src/assets/js/app'),
+      '@js-lib' : resolve('src/assets/js/lib'),
+      //'preloadjs$' : 'yuki-createjs/lib/preloadjs-0.6.2.combined.js',   // 报错
+      '@preloadjs' : 'yuki-createjs/lib/preloadjs-0.6.2.combined.js',
     }
   },
   plugins: [

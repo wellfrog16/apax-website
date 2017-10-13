@@ -169,9 +169,8 @@
 </template>
 
 <script>
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus';
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import Arrow from '@/components/Arrow.vue';
 
 export default {
     name : 'rocks-view',
@@ -194,11 +193,9 @@ export default {
         // }, (error) => {
         //     console.log(error)
         // });
+        this.$bus.$emit('canvas-open');
     },
     mounted(){
-        console.log(2)
-        Bus.$emit('canvas-open');
-        
         let sr = this.$sr({ reset: true, delay: 0 });
         sr.reveal('.content div', { duration: 1000 });
     },

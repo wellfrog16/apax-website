@@ -9,7 +9,6 @@
             <p>A leading experiential marketing company in Asia Pacific, headquartered in Shanghai, and has regional offices in Beijing, Xiamen, Hong Kong, India. We focus on the interpretation of brand DNA, solutions, cross border collaborations, global resource integration, diversified brand interaction with three main divisions of
                 <br />APAX EVENTS, APAX LIVE and APAX RECREATION. </p>
             <p>We are constantly on the lookout for new employees who excite us and who are excited by us.</p>
-            <br>
             <p>Please send us your resume here at <br>
             eva_gong@apaxgroup.com<br>
             jean_qin@apaxgroup.com</p>
@@ -18,14 +17,13 @@
 </template>
 
 <script>
-import Bus from '../assets/lib/helper/bus';
-
 export default {
     name : 'career-view',
+    created(){
+        this.$bus.$emit('canvas-close');
+    },
     mounted(){
-        setTimeout(()=> this.$('.career-view').fadeIn(), 500);
-
-        Bus.$emit('canvas-close');
+        setTimeout(()=> this.$('.career-view').fadeIn(), 500);        
     }
 }
 </script>

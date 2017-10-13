@@ -18,16 +18,20 @@
             <div class="share col-xs-offset-1 col-xs-8">
                 <Share></Share>
             </div>
+            <div class="col-xs-2">
+                <router-link :to="{ name : 'events-detail', params : { id : prevId } }" v-if="!prevId==0"><img src="../assets/img/icon/page-prev.png" alt=""></router-link>
+                <router-link :to="{ name : 'events-detail', params : { id : nextId } }" v-if="!nextId==0"><img src="../assets/img/icon/page-next.png" alt=""></router-link>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import AContent from '../components/AContent.vue'
-import Share from '../components/Share.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus';
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import AContent from '@/components/AContent.vue';
+import Share from '@/components/Share.vue';
+import Arrow from '@/components/Arrow.vue';
+import config from '@js-app/config';
 
 export default {
     name : 'events-detail-view',
@@ -36,44 +40,63 @@ export default {
         return {
             link : 'events',
             title : '',
+            config,
             info : {
                 title : '1',
                 date : null,
                 content : '2'
-            }
+            },
+            prevId : 0,
+            nextId : 0
         }
     },
-    mounted(){
-        //console.log(this.$route.params)
-        // this.$axios.get('http://jsonplaceholder.typicode.com/photos/' + this.$route.params.id).then((response) => {
-        //     this.info = response.data;
-        //     this.info.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDay() + 1);
-        //     this.info.content = `
-        //         大量内容
-        //     `
-        //     window.scrollTo(0, 0);
-        // }, (error) => {
-        //     console.log(error)
-        // });
-        Bus.$emit('canvas-open');
+    beforeRouteUpdate (to, from, next) {
+        this.setBg();
+        this.setPage();
+        this.loadDetail();
+        next();
+    },
+    created(){
+        this.setBg();
+        this.setPage();
 
-        //this.info = {};
-        this.$axios.get('http://www.tron-m.com/apax/news/get.do?id=' + this.$route.params.id).then((response) => {
-            //console.log(response.data.result);
-            this.info.title = response.data.result.enTitle;
-            this.info.content = response.data.result.enHtml;
-            this.info.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDay() + 1);
-            // this.info.content = `
-            //     大量内容
-            // `
-            window.scrollTo(0, 0);
-        }, (error) => {
-            console.log(error)
-        });
+    },
+    mounted(){
+        this.loadDetail();
     },
     methods : {
         goback(){
             this.$router.go(-1);
+        },
+
+        setBg(){
+            this.$bus.$emit('canvas-open');
+        },
+
+        setPage(){
+            this.$axios.get('http://www.tron-m.com/apax/news/navigation.do?id=' + this.$route.params.id + '&category=ourwork').then((response) => {
+                //console.log(response);
+                var data = response.data.result;
+
+                if (data.prev) { this.prevId = data.prev.id; }
+
+                if (data.next) { this.nextId = data.next.id; }
+
+            }, (error) => {
+                console.log(error)
+            });
+        },
+
+        loadDetail(){
+            this.$axios.get('http://www.tron-m.com/apax/news/get.do?id=' + this.$route.params.id).then((response) => {
+                //console.log(response.data.result);
+                this.info.title = response.data.result.enTitle;
+                this.info.content = response.data.result.enHtml;
+                this.info.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDay() + 1);
+                window.scrollTo(0, 0);
+            }, (error) => {
+                console.log(error)
+            });
         }
     }
 }

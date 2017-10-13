@@ -84,11 +84,10 @@
 </template>
 
 <script>
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import AContent from '../components/AContent.vue'
-import Share from '../components/Share.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus';
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import AContent from '@/components/AContent.vue';
+import Share from '@/components/Share.vue';
+import Arrow from '@/components/Arrow.vue';
 
 export default {
     name : 'iconic-detail-view',
@@ -100,6 +99,7 @@ export default {
         }
     },
     created(){
+        this.$bus.$emit('canvas-open');
         //console.log(this.$route.params)
         this.$axios.get('http://jsonplaceholder.typicode.com/photos/' + this.$route.params.id).then((response) => {
             this.info = response.data;
@@ -114,7 +114,6 @@ export default {
         });
     },
     mounted(){
-        Bus.$emit('canvas-open');
         let sr = this.$sr({ reset: true, delay: 0 });
         sr.reveal('.content div', { duration: 1000 });
     },

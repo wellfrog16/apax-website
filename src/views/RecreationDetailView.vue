@@ -16,7 +16,7 @@ from the daily life, along with the trends, justified The brand's features of al
                 <!-- <img src="../assets/img/main/video-bg.jpg" alt=""> -->
                 <img src="../../static/video-bg.jpg" alt="11">
                 <div class="hover">
-                    <div class="mask"><div class="middle"><img src="../assets/img/icon/play.png" alt=""></div></div>
+                    <div class="mask"><div class="middle"><img class="play" src="../assets/img/icon/play.png" alt=""></div></div>
                 </div>
             </div>
             <div class="back col-xs-1">
@@ -26,14 +26,24 @@ from the daily life, along with the trends, justified The brand's features of al
                 <Share></Share>
             </div>
         </div>
+
+        <!-- 播放器 -->
+        <div class="player-box">
+            <div>
+                <div id="object">
+                    <video src="../../static/recreation.mp4" controls="controls"></video>
+                </div>
+                <div class="close"><img src="../assets/img/icon/close.png" alt="关闭" /></div>
+                <div class="tips"></div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus'
-import Share from '../components/Share.vue'
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import Arrow from '@/components/Arrow.vue';
+import Share from '@/components/Share.vue';
 
 export default {
     name : 'recreation-detail-view',
@@ -43,8 +53,12 @@ export default {
             link : 'recreation'
         }
     },
+    created(){
+        this.$bus.$emit('canvas-open');
+    },
     mounted(){
-        Bus.$emit('canvas-open');
+        $('.recreation-detail-view .play').on('click', () => $('.player-box').show().find('video')[0].play());
+        $('.player-box .close').on('click', () => $('.player-box').hide());
     },
     methods : {
         goback(){
@@ -138,6 +152,56 @@ export default {
 
     .share {
         text-align: center;
+    }
+
+    .player-box {
+        position:fixed;
+        z-index:20;
+        width:100%;
+        height:100%;
+        background-color:rgba(0,0,0, 0.8);
+        top:0;
+        display:none;
+
+        > div {
+            position:relative;
+            top:50%;
+            left:50%;
+            margin-top:-300px;
+            margin-left:-450px;
+            width:900px;
+            height:600px;
+            padding:5px;
+            background-color:#fff;
+        }
+
+        object, #object {
+            width:100%;
+            height:100%;
+
+            video {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .close {
+            position:absolute;
+            right:10px;
+            top:10px;
+            animation:kf-close-out 500ms ease;
+            cursor:pointer;
+
+            &:hover {
+                animation:kf-close-in 500ms ease;
+            }
+        }
+
+        .tips {
+            position:absolute;
+            bottom:20px;
+            left:40px;
+        }
     }
 }
 

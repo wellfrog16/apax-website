@@ -12,7 +12,7 @@
                 <div class="hover">
                     <div class="mask">
                         <h2>{{ item.enTitle }}</h2>
-                        <router-link :to="{ name: 'sifs-detail', params: { id: item.id }}"><img src="../assets/img/main/more.png" alt=""></router-link>
+                        <!-- <router-link :to="{ name: 'sifs-detail', params: { id: item.id }}"><img src="../assets/img/main/more.png" alt=""></router-link> -->
                     </div>
                 </div>
             </div>
@@ -23,9 +23,8 @@
 
 <script>
 
-import OurworkSubNav from '../components/OurworkSubNav.vue'
-import Arrow from '../components/Arrow.vue'
-import Bus from '../assets/lib/helper/bus'
+import OurworkSubNav from '@/components/OurworkSubNav.vue';
+import Arrow from '@/components/Arrow.vue';
 
 export default {
     name : 'sifs-list-view',
@@ -44,6 +43,7 @@ export default {
         // }, (error) => {
         //     console.log(error)
         // });
+        this.$bus.$emit('canvas-open');
         this.items = [];
         this.$axios.get('http://www.tron-m.com/apax/news/list.do?page=1&rows=100&category=ourwork&orderBy=id:desc').then((response) => {
             
@@ -51,9 +51,6 @@ export default {
         }, (error) => {
             console.log(error)
         });
-    },
-    mounted(){
-        Bus.$emit('canvas-open');
     },
     updated(){
             let sr = this.$sr({ reset: true, delay: 300 });
